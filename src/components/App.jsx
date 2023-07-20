@@ -1,21 +1,17 @@
-import ContactForm from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import Filter from './Filter/Filter';
+import { Route, Routes } from 'react-router-dom';
+import Contacts from './Contacts/Contacts';
+import { SharedLayout } from './SharedLayout/SharedLayout';
+import Login from './Login/Login';
+import Register from './Register/Register';
 
 export default function App() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route path="contacts" element={<Contacts />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Route>
+    </Routes>
   );
 }
