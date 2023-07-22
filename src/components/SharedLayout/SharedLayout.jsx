@@ -2,27 +2,24 @@ import { NavLink, Outlet } from 'react-router-dom';
 import css from './SharedLayout.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { removeToken } from 'services/auth/auth';
-import { getProfileThunk, logoutThunk } from 'redux/auth/authThunk';
-import { useEffect } from 'react';
+import { removeToken } from 'services/services';
+import { logoutThunk } from 'redux/auth/thunk';
+import { selectProfile } from 'redux/auth/selectors';
 
 export const SharedLayout = () => {
-  const { profile, token } = useSelector(state => state.auth);
+  const profile = useSelector(selectProfile);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(logoutThunk());
     removeToken();
+    localStorage.removeItem('persist:auth');
   };
-
-  useEffect(() => {
-    token && dispatch(getProfileThunk());
-  }, [token]);
 
   return (
     <>
       <header className={css.header}>
-        <nav>
+        <nav className={css.navigation}>
           <NavLink className={css.link} to="/" end>
             Home
           </NavLink>
@@ -36,7 +33,7 @@ export const SharedLayout = () => {
           )}
           {profile && (
             <>
-              <p>{profile.data.name}</p>
+              <p className={css.userName}>Hello, {profile.data.name}</p>
               <Button onClick={handleLogOut} variant="secondary">
                 Log Out
               </Button>

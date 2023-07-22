@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/contactsSlice';
-import { addContactThunk } from 'redux/contactsThunk';
+import { getContacts } from 'redux/contacts/slice';
+import { addContactThunk } from 'redux/contacts/thunk';
 import { Button } from '@mui/material';
 
 export default function ContactForm() {

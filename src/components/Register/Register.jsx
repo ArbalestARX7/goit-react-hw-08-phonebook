@@ -1,24 +1,47 @@
 import { Button } from '@mui/material';
 import css from './/Register.module.css';
-import { signUp } from 'services/auth/auth';
+import { signUp } from 'services/autharization/autharization';
 import { Notify } from 'notiflix';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'redux/auth/thunk';
+import { useState } from 'react';
 
 const Register = () => {
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const onInputHandler = evt => {
+    const { value } = evt.currentTarget;
+
+    switch (evt.currentTarget.name) {
+      case 'email':
+        setEmail(value);
+        break;
+
+      case 'password':
+        setPassword(value);
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const onFormSubmit = e => {
     e.preventDefault();
-    const { name, email, password } = e.target.elements;
+    const { name } = e.target.elements;
+
     const newUser = {
       name: name.value,
-      email: email.value,
-      password: password.value,
+      email,
+      password,
     };
+    console.log(newUser);
     signUp(newUser)
       .then(() => {
         Notify.success('Cool, you are finish the registration');
-        navigate('/login');
+        dispatch(loginThunk({ email, password }));
       })
       .catch(error => console.log(error.message));
   };
@@ -42,6 +65,7 @@ const Register = () => {
             type="text"
             name="email"
             required
+            onChange={onInputHandler}
           />
         </label>
         <label htmlFor="password" className={css.contactLabel}>
@@ -51,6 +75,7 @@ const Register = () => {
             type="tel"
             name="password"
             required
+            onChange={onInputHandler}
           />
         </label>
         <Button variant="contained" type="submit">

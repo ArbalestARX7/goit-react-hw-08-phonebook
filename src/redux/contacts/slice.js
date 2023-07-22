@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  addContactThunk,
-  getContactsThunk,
-  removeContactThunk,
-} from './contactsThunk';
+import { addContactThunk, getContactsThunk, removeContactThunk } from './thunk';
 
 const handlePanding = state => {
   state.isLoading = true;

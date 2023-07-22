@@ -1,5 +1,10 @@
+.navigation{
+    display: flex;
+    align-items: baseline;
+}
+
 .container{
-    max-width: 960px;
+    min-width: 960px;
         margin: 0 auto;
         padding: 0 16px;
 }
@@ -7,7 +12,7 @@
 .header{
     display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         gap: 12px;
         padding: 8px 0;
         margin-bottom: 16px;
@@ -24,4 +29,8 @@
         color: black;
         font-weight: 500;
     
+}
+
+.userName{
+    color: #1976d2;
 }

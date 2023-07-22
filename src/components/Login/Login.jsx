@@ -1,18 +1,13 @@
 import { Button } from '@mui/material';
 import css from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk } from 'redux/auth/authThunk';
-import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'redux/auth/thunk';
+import { Notify } from 'notiflix';
 
 const Login = () => {
-  const isAuth = useSelector(state => state.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    isAuth && navigate('/');
-  }, [dispatch, isAuth, navigate]);
 
   const onFormSubmit = e => {
     e.preventDefault();
@@ -24,7 +19,9 @@ const Login = () => {
       password: password.value,
     };
 
-    dispatch(loginThunk(user));
+    dispatch(loginThunk(user))
+      .unwrap()
+      .catch(() => Notify.failure('Some error:('));
   };
 
   const onRegisetrButton = e => {
