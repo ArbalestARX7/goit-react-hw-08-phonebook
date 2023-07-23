@@ -6,7 +6,7 @@ function PublicRoute({ children }) {
   const isAuth = useSelector(selectToken);
   const { state } = useLocation();
 
-  return !isAuth ? children : <Navigate to={state ? state : '/'} />;
+  return !isAuth ? children : <Navigate to={state ? state : '/contacts'} />;
 }
 
 export default PublicRoute;

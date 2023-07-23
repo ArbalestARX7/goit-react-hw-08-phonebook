@@ -5,11 +5,13 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import PrivateRoute from './PrivetRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
+import Home from './Home/Home';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home/>}/>
         <Route
           path="contacts"
           element={

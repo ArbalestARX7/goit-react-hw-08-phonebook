@@ -23,9 +23,9 @@ export const SharedLayout = () => {
           <NavLink className={css.link} to="/" end>
             Home
           </NavLink>
-          <NavLink className={css.link} to="/contacts">
+          {profile && <NavLink className={css.link} to="/contacts">
             Contacts
-          </NavLink>
+          </NavLink>}
           {!profile && (
             <NavLink className={css.link} to="/login">
               Login

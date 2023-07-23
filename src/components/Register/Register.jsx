@@ -72,7 +72,7 @@ const Register = () => {
           Password
           <input
             className={css.contactInput}
-            type="tel"
+            type="password"
             name="password"
             required
             onChange={onInputHandler}
